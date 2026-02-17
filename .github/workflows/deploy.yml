@@ -10,6 +10,7 @@ env:
   ECR_REGISTRY: 329631044416.dkr.ecr.us-east-1.amazonaws.com
   ECR_REPOSITORY: repository-node-lab
 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
