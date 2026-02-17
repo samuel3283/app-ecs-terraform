@@ -1,7 +1,7 @@
 [
 {
       "name": "task-frontend-node",
-      "image": "594671381337.dkr.ecr.us-east-1.amazonaws.com/repository-node-lab:latest",
+      "image": "329631044416.dkr.ecr.us-east-1.amazonaws.com/repository-node-lab:latest",
       "essential": true,
       "portMappings": [
         {
