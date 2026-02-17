@@ -78,7 +78,7 @@ resource "aws_lb_listener" "listener" {
 
 resource "aws_ecs_service" "my_first_service" {
   name            = var.name_service
-  cluster         = "cluster-lab-ecs"
+  cluster         = "aws-reto-cluster"
   task_definition = "${aws_ecs_task_definition.my_first_task.arn}" # Referencing the task our service will spin up
   launch_type     = "FARGATE"
   desired_count   = 2 # Setting the number of containers to 3
@@ -91,7 +91,7 @@ resource "aws_ecs_service" "my_first_service" {
   }
 
   network_configuration {
-    subnets          = [ "subnet-08063edc21a996fb6","subnet-0470f753f16c4958a","subnet-0412b98279eccb694"]
+    subnets          = [ "subnet-076382280f9e7ea51","subnet-005671e664ea149fc"]
     assign_public_ip = true   
     security_groups  = [var.security_group] 
   }
