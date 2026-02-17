@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REGISTRY: 594671381337.dkr.ecr.us-east-1.amazonaws.com
+  ECR_REGISTRY: 329631044416.dkr.ecr.us-east-1.amazonaws.com
   ECR_REPOSITORY: repository-node-lab
 
 jobs:
