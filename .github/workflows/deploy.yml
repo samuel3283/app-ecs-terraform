@@ -1,0 +1,66 @@
+name: Build Push and Terraform Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: 594671381337.dkr.ecr.us-east-1.amazonaws.com
+  ECR_REPOSITORY: repository-node-lab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Descargar Fuentes
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configurar credenciales AWS
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # 3️⃣ Login a ECR
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password --region $AWS_REGION | \
+          docker login --username AWS --password-stdin $ECR_REGISTRY
+
+      # 4️⃣ Build Docker Image
+      - name: Build Docker Image
+        run: |
+          docker build -t $ECR_REPOSITORY .
+
+      # 5️⃣ Tag Image
+      - name: Tag Image
+        run: |
+          docker tag $ECR_REPOSITORY:latest \
+          $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      # 6️⃣ Push Image
+      - name: Push Image to ECR
+        run: |
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      # 7️⃣ Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # 8️⃣ Terraform Init
+      - name: Terraform Init
+        run: terraform init
+
+      # 9️⃣ Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan -no-color -input=false
+
+      # 🔟 Terraform Apply
+      - name: Terraform Apply
+        run: terraform apply --auto-approve

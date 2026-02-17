@@ -1,0 +1,15 @@
+[
+{
+      "name": "task-frontend-node",
+      "image": "594671381337.dkr.ecr.us-east-1.amazonaws.com/repository-node-lab:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000
+        }
+      ],
+      "memory": 512,
+      "cpu": 256
+}
+]
