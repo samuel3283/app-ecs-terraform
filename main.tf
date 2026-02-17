@@ -68,9 +68,6 @@ resource "aws_lb_target_group" "target_group" {
     port     = "3000"
   }
 
-  enabled = false
-    type    = "source_ip"
-  }
 
 }
 
