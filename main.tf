@@ -2,7 +2,7 @@
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "2.70.0"
+      version = "5.0"
     }
   }
 
@@ -67,6 +67,11 @@ resource "aws_lb_target_group" "target_group" {
     protocol = "TCP"
     port     = "3000"
   }
+
+  enabled = false
+    type    = "source_ip"
+  }
+
 }
 
 resource "aws_lb_listener" "listener" {
