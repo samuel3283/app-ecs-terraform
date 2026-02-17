@@ -5,7 +5,7 @@
       version = "5.0"
     }
   }
-
+  #version = "2.70.0"
   backend "s3" {
     bucket = "storage-iac-reto"
     key    = "dev/app-aws-terraform-reto.tfstate"
@@ -63,10 +63,15 @@ resource "aws_lb_target_group" "target_group" {
   target_type = "ip"         # 🔥 obligatorio para Fargate
   vpc_id      = var.vpc_id
 
-  health_check {
-    protocol = "TCP"
-    port     = "3000"
-  }
+  #health_check {
+  #  protocol = "TCP"
+  #  port     = "3000"
+  #}
+
+  #stickiness {
+  #  enabled = false
+  #  type    = "source_ip"
+  #}
 
 
 }
