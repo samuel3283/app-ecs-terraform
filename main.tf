@@ -65,7 +65,7 @@ resource "aws_lb_target_group" "target_group" {
   #depends_on = [aws_alb.application_load_balancer]  
 }
 
-
+/*
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = var.arn_load_balancer
   port              = "3000"
@@ -74,7 +74,7 @@ resource "aws_lb_listener" "listener" {
     type             = "forward"
     target_group_arn = "${aws_lb_target_group.target_group.arn}" # Referencing our tagrte group
   }
-}
+}*/
 
 resource "aws_ecs_service" "my_first_service" {
   name            = var.name_service
